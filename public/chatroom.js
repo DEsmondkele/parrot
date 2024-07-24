@@ -2,9 +2,9 @@ const socket = io();
 const username = localStorage.getItem('username');
 
 function sendMessage() {
-    const message = document.getElementById('message').value;
-    if (message) {
-        socket.emit('message', message);
+    const messageText = document.getElementById('message').value;
+    if (messageText) {
+        socket.emit('message', { user: username, text: messageText });
         document.getElementById('message').value = '';
     }
 }
@@ -27,5 +27,5 @@ socket.on('user left', (msg) => {
     document.getElementById('messages').appendChild(item);
 });
 
-// Notify the server that a user has joined
+// Notify that a user has joined
 socket.emit('join', username);
