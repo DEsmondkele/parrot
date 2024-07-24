@@ -36,7 +36,7 @@ beforeAll((done) => {
         clientSocket = ioClient(`http://localhost:${port}`);
         clientSocket.on('connect', done);
     });
-}, 20000); // Increase the timeout for beforeAll
+}, 20000);
 
 afterAll((done) => {
     if (clientSocket) {
@@ -45,7 +45,7 @@ afterAll((done) => {
     if (server) {
         server.close(done);
     }
-}, 20000); // Increase the timeout for afterAll
+}, 20000);  
 
 describe('Chat Server', () => {
     test('should broadcast join message', (done) => {
@@ -55,7 +55,7 @@ describe('Chat Server', () => {
             expect(msg).toBe(`${name} joined the chat`);
             done();
         });
-    }, 20000); // Increase the timeout for this test
+    }, 20000); 
 
     test('should broadcast messages', (done) => {
         const name = 'TestUser';
@@ -66,13 +66,13 @@ describe('Chat Server', () => {
             expect(msg).toEqual({ user: name, text: message });
             done();
         });
-    }, 20000); // Increase the timeout for this test
+    }, 20000); // Increase the timeout
 
     test('should broadcast leave message', (done) => {
         const name = 'TestUser';
         clientSocket.emit('join', name);
         clientSocket.on('user joined', () => {
-            // Create a new client socket to listen for the leave message
+            // Created a new client socket to listen for the leave message
             const newClientSocket = ioClient(`http://localhost:${server.address().port}`);
             newClientSocket.on('connect', () => {
                 newClientSocket.on('user left', (msg) => {
@@ -81,5 +81,5 @@ describe('Chat Server', () => {
                 });
             });
         });
-    }, 20000); // Increase the timeout for this test
+    }, 20000); 
 });

@@ -17,7 +17,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('message', (msg) => {
-        io.emit('message', { user: socket.username, text: msg });
+        io.emit('message', msg); 
     });
 
     socket.on('disconnect', () => {
@@ -25,11 +25,12 @@ io.on('connection', (socket) => {
         io.emit('user left', `${socket.username} left the chat`);
     });
 });
+
 const isTest =  process.env.NODE_ENV === 'test';
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-    if (!isTest) {
+    if (!isTest) { // checking for test environment or live environment
         console.log(`Server is running on port ${PORT}`);
     }
 });
