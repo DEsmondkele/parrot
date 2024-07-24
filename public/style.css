@@ -12,9 +12,9 @@ body {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #1e1e1e; /* Darker background for the chatroom */
+    background-color: #1e1e1e; /* Darker background */
     border: 1px solid #444; /* Slightly lighter border */
-    border-radius: 10px; /* for Sleek edges */
+    border-radius: 10px; /* Sleek edges */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
@@ -41,7 +41,7 @@ body {
     background-color: #333; 
 }
 
-/* this is for the Input Fields */
+/*the Input Fields */
 input[type="text"] {
     width: calc(100% - 22px); 
     padding: 10px;

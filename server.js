@@ -9,7 +9,7 @@ const io = socketIo(server);
 app.use(express.static('public'));
 
 io.on('connection', (socket) => {
-    console.log('A user connected');
+    console.log('A user is connected');
     
     socket.on('join', (name) => {
         socket.username = name;
@@ -22,15 +22,17 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log('A user disconnected');
-        io.emit('user left', `${socket.username} left the chat`);
+        if (socket.username) {
+            io.emit('user left', `${socket.username} left the chat`);
+        }
     });
 });
 
-const isTest =  process.env.NODE_ENV === 'test';
+const isTest = process.env.NODE_ENV === 'test';
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-    if (!isTest) { // checking for test environment or live environment
+    if (!isTest) {
         console.log(`Server is running on port ${PORT}`);
     }
 });
